@@ -30,65 +30,8 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->get('/test', 'Test::index', ['filter' => 'userNoAuth']);
-$routes->get('/remoteStart', 'Test::remoteStart', ['filter' => 'userNoAuth']);
-// $routes->get('/remoteStatus', 'Test::remoteStatus', ['filter' => 'userNoAuth']);
-$routes->get('/remoteStop', 'Test::remoteStop', ['filter' => 'userNoAuth']);
-
-$routes->get('/', 'Home::index', ['filter' => 'userNoAuth']);
-$routes->match(['get', 'post'], 'register', 'Home::register', ['filter' => 'userNoAuth']);
-
-// Authentication
-$routes->match(['get', 'post'], 'login', 'Authentication::login', ['filter' => 'userNoAuth']);
-$routes->get('logout', 'Authentication::logout');
-
-// Dashboard
-$routes->get('/dashboard', 'Dashboard::index', ['filter' => 'userAuth']);
-
-// Map
-$routes->group('map', ['filter' => 'userAuth'], function ($routes) {
-    $routes->get('index', 'Map::index');
-    $routes->post('SocketKey', 'Map::SocketKey');
-    $routes->post('GetLocations', 'Map::GetLocations');
-    $routes->post('GetMobileLocations', 'Map::GetMobileLocations');
-    $routes->post('GetUserChargingStatusByTag', 'Map::GetUserChargingStatusByTag');
-    $routes->post('GetDetail', 'Map::GetDetail');
-});
-
-// Wallet
-$routes->group('wallet', ['filter' => 'userAuth'], function ($routes) {
-    $routes->get('index', 'Wallet::index');
-    $routes->get('topup', 'Wallet::topup');
-});
-
-// Booking
-$routes->group('booking', ['filter' => 'userAuth'], function ($routes) {
-    $routes->get('index', 'Booking::index');
-});
-
-// Charging
-$routes->group('charging', ['filter' => 'userAuth'], function ($routes) {
-    $routes->get('index', 'Charging::index');
-    $routes->post('GetStation', 'Charging::getEVStation');
-    $routes->post('getConnecter', 'Charging::getEVStationConnector');  
-    $routes->post('getStatusConnecter', 'Charging::getEVStationConnectorStatus');
-});
-
-// Profile
-$routes->group('profile', ['filter' => 'userAuth'], function ($routes) {
-    $routes->get('index', 'Profile::index');
-    $routes->get('history', 'Profile::history');
-    $routes->post('update', 'Profile::update');
-    $routes->get('data', 'Profile::data');
-});
-
-// Report
-$routes->group('report', ['filter' => 'userAuth'], function ($routes) {
-    $routes->get('index', 'Report::index');
-});
-
-$routes->get('news', 'General::news');
-$routes->get('problem-report', 'General::problemReport');
+$routes->get('/', 'Home::index');
+$routes->get('/create', 'Home::create');
 
 /*
  * --------------------------------------------------------------------
